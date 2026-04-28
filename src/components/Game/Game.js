@@ -8,12 +8,12 @@ import { checkGuess } from "../../game-helpers";
 import Banner from "../Banner";
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 
-// Pick a random word on every pageload.
-const answer = sample(WORDS);
-// To make debugging easier, we'll log the solution in the console.
-console.info({ answer });
-
 function Game() {
+  const [answer, setAnswer] = React.useState(() => {
+    const newAnswer = sample(WORDS);
+    console.info({ answer: newAnswer });
+    return newAnswer;
+  });
   const [guesses, setGuesses] = React.useState([]);
   const [endType, setEndType] = React.useState(null);
 
@@ -28,6 +28,15 @@ function Game() {
     }
   };
 
+  const handleRestart = () => {
+    const newAnswer = sample(WORDS);
+    setAnswer(newAnswer);
+    // To make debugging easier, we'll log the solution in the console.
+    console.info({ answer: newAnswer });
+    setGuesses([]);
+    setEndType(null);
+  };
+
   return (
     <>
       <Guesses guesses={guesses} />
@@ -37,7 +46,12 @@ function Game() {
         disabled={endType !== null}
       />
       {endType && (
-        <Banner type={endType} numGuesses={guesses.length} answer={answer} />
+        <Banner
+          type={endType}
+          numGuesses={guesses.length}
+          answer={answer}
+          onRestart={handleRestart}
+        />
       )}
     </>
   );
