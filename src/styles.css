@@ -196,6 +196,42 @@ h1 {
   border: 0;
 }
 
+.keyboard {
+  padding: 24px 0 48px; 
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.keyboard-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.letter {
+  align-items: center;
+  aspect-ratio: 1 / 1;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  min-width: 32px;
+  background-color: var(--color-gray-700);
+  color: white;
+  text-transform: uppercase;
+}
+
+.letter.correct {
+  background-color: var(--color-success);
+}
+.letter.misplaced {
+  background-color: var(--color-warning);
+}
+.letter.incorrect {
+  background-color: var(--color-gray-300);
+}
+
 /*
   Modal styles
 

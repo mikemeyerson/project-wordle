@@ -31,7 +31,11 @@ function Game() {
   return (
     <>
       <Guesses guesses={guesses} />
-      <Input onSubmit={handleSubmit} disabled={endType !== null} />
+      <Input
+        guesses={guesses}
+        onSubmit={handleSubmit}
+        disabled={endType !== null}
+      />
       {endType && (
         <Banner type={endType} numGuesses={guesses.length} answer={answer} />
       )}
